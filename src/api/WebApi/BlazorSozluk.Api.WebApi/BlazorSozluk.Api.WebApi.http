@@ -1,0 +1,6 @@
+@BlazorSozluk.Api.WebApi_HostAddress = http://localhost:5055
+
+GET {{BlazorSozluk.Api.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
