@@ -1,4 +1,4 @@
-using BlazorSozluk.Infrastructure.Persistence.Extensions;
+using BlazorSozluk.Api.Infrastructure.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,7 +4,7 @@ using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace BlazorSozluk.Infrastructure.Persistence.Context;
+namespace BlazorSozluk.Api.Infrastructure.Persistence.Context;
 
 internal class Seed
 {
@@ -33,11 +33,11 @@ internal class Seed
 
         var context = new BlazorSozlukContext(dbContextBuilder.Options);
 
-        //if (context.Users.Any())
-        //{
-        //    await Task.CompletedTask;
-        //    return;
-        //}
+        if (context.Users.Any())
+        {
+            await Task.CompletedTask;
+            return;
+        }
 
         var users = GetUsers();
         var userIds = users.Select(i => i.Id);

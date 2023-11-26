@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BlazorSozluk.Infrastructure.Persistence.Migrations
+namespace BlazorSozluk.Api.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class InitMigration : Migration

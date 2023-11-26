@@ -1,9 +1,9 @@
 ﻿using BlazorSozluk.Api.Domain.Models;
-using BlazorSozluk.Infrastructure.Persistence.Context;
+using BlazorSozluk.Api.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BlazorSozluk.Infrastructure.Persistence.EntityConfigurations.Entry;
+namespace BlazorSozluk.Api.Infrastructure.Persistence.EntityConfigurations.Entry;
 
 public class EntryFavoriteEntityConfiguration : BaseEntityConfiguration<EntryFavorite>
 {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BlazorSozluk.Infrastructure.Persistence.EntityConfigurations;
+namespace BlazorSozluk.Api.Infrastructure.Persistence.EntityConfigurations;
 
 public class UserEntityConfiguration : BaseEntityConfiguration<User>
 {

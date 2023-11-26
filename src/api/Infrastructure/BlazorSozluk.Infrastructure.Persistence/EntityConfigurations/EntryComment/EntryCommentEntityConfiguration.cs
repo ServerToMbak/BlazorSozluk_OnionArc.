@@ -1,8 +1,8 @@
-﻿using BlazorSozluk.Infrastructure.Persistence.Context;
+﻿using BlazorSozluk.Api.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BlazorSozluk.Infrastructure.Persistence.EntityConfigurations.EntryComment;
+namespace BlazorSozluk.Api.Infrastructure.Persistence.EntityConfigurations.EntryComment;
 
 public class EntryCommentEntityConfiguration : BaseEntityConfiguration<Api.Domain.Models.EntryComment>
 {
