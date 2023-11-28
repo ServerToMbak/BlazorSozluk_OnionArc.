@@ -1,18 +1,14 @@
 ﻿using BlazorSozluk.Api.Application.Interfaces.Repositories;
 using BlazorSozluk.Api.Domain.Models;
-using BlazorSozluk.Api.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq.Expressions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace BlazorSozluk.Api.Infrastructure.Persistence.Repositories;
 
 public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
 {
-    private readonly BlazorSozlukContext _context;
-
-    public GenericRepository(BlazorSozlukContext  context)
+    private readonly DbContext _context;
+    public GenericRepository(DbContext  context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
@@ -163,13 +159,13 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public virtual bool DeleteRange(Expression<Func<TEntity, bool>> predicate)
     {
-        _context.RemoveRange(predicate);
+        _context.RemoveRange(entity.Where(predicate));
         return _context.SaveChanges() > 0;
     }
 
     public virtual async Task<bool> DeleteRangeAsync(Expression<Func<TEntity, bool>> predicate)
     {
-        _context.RemoveRange(predicate);
+        _context.RemoveRange(entity.Where(predicate));
         return await _context.SaveChangesAsync() > 0;
     }
     #endregion
