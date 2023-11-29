@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BlazorSozluk.Api.Application.Interfaces.Repositories;
 using BlazorSozluk.Common;
-using BlazorSozluk.Common.Events;
+using BlazorSozluk.Common.Events.User;
 using BlazorSozluk.Common.Infrastructure;
 using BlazorSozluk.Common.Infrastructure.Exceptions;
 using BlazorSozluk.Common.Models.RequestModels;

@@ -6,6 +6,7 @@ using BlazorSozluk.Common;
 using BlazorSozluk.Common.Infrastructure.Exceptions;
 using BlazorSozluk.Common.Models.RequestModels;
 using MediatR;
+using BlazorSozluk.Common.Events.User;
 
 namespace BlazorSozluk.Api.Application.Features.Commands.User.Update;
 

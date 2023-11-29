@@ -1,4 +1,4 @@
-﻿namespace BlazorSozluk.Common.Events;
+﻿namespace BlazorSozluk.Common.Events.User;
 
 public class UserEmailChangedEvent
 {

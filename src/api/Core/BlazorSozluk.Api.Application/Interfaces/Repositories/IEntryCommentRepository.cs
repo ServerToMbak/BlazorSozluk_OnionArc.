@@ -2,6 +2,6 @@
 
 namespace BlazorSozluk.Api.Application.Interfaces.Repositories;
 
-public interface IEntrCommentRepository : IGenericRepository<EntryComment>
+public interface IEntryCommentRepository : IGenericRepository<EntryComment>
 {
 }
