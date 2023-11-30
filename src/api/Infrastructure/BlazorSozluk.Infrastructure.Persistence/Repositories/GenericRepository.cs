@@ -76,7 +76,9 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public IQueryable<TEntity> AsQueryable()
     {
-        throw new NotImplementedException();
+        var query = entity.AsQueryable();
+
+        return query;
     }
     #endregion
 

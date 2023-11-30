@@ -1,7 +1,6 @@
 using BlazorSozluk.Api.Infrastructure.Persistence.Extensions;
 using BlazorSozluk.Api.Application.Extensions;
 using FluentValidation.AspNetCore;
-using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
