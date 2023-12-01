@@ -9,5 +9,6 @@ public class EntryVote : BaseEntity
     public Guid CreatedById { get; set; }
 
     public virtual Entry Entry { get; set; }
+
 }            
 
