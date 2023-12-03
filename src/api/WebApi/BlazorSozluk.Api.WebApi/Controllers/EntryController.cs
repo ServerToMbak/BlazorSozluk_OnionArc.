@@ -15,7 +15,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
     public class EntryController : BaseController
     {
         private readonly IMediator _mediator;
-
         public EntryController(IMediator mediator)
         {
             _mediator = mediator;
@@ -36,7 +35,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
             return Ok(result);
         }
 
-
         [HttpGet]
         [Route("Comments/{id}")]
         public async Task<IActionResult> GetEntryComments(Guid id, int page, int pageSize)
@@ -45,6 +43,7 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
             return Ok(result);
         }
+
         [HttpGet]
         [Route("userEntries")]
         public async Task<IActionResult> GetUserEntries(string userName,Guid userId, int page, int pageSize)
@@ -57,7 +56,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
             return Ok(result);
         }
 
-
         [HttpGet]
         [Route("MainPageEntries")]
         public async Task<IActionResult> GetMainPageEntries(int page, int pageSize)
@@ -67,9 +65,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
             return Ok(result);
         }
-
-
-
 
         [HttpPost]
         [Route("CreateEntry")]
@@ -93,7 +88,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
             return Ok(result);
         }
-
 
         [HttpGet]
         [Route("Search")]

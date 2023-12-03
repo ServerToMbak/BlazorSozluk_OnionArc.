@@ -1,6 +1,7 @@
 using BlazorSozluk.Api.Infrastructure.Persistence.Extensions;
 using BlazorSozluk.Api.Application.Extensions;
 using FluentValidation.AspNetCore;
+using BlazorSozluk.Api.WebApi.Infrastructure.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,8 +18,11 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddInfrastructureRegistration(builder.Configuration);
+builder.Services.ConfigureAuth(builder.Configuration);
+
 builder.Services.AddApplicationRegistration();
+builder.Services.AddInfrastructureRegistration(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +34,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
+
+app.UseAuthentication();    
 app.UseAuthorization();
 
 app.MapControllers();

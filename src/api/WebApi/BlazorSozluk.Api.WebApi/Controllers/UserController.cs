@@ -18,8 +18,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
             _mediator = mediator;
         }
 
-
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -27,15 +25,13 @@ namespace BlazorSozluk.Api.WebApi.Controllers
             return Ok(user);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("UserName/{userName}")]
         public async Task<IActionResult> GetByUserName(string userName)
         {
             var user = await _mediator.Send(new GetUserDetailQuery(Guid.Empty,userName));
 
             return Ok(user);
         }
-
-
 
         [HttpPost]
         [Route("Login")]
@@ -54,7 +50,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
             return Ok(guid);
         }
 
-
         [HttpPost]
         [Route("Update")]
         public async Task<IActionResult> UpdateUser(UpdateUserCommand command)
@@ -64,7 +59,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
             return Ok(guid);
         }
 
-
         [HttpPost]
         [Route("Confirm")]
         public async Task<IActionResult> ConfirmEmail(Guid id)
@@ -73,8 +67,6 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
             return Ok(guid);
         }
-
-
 
         [HttpPost]
         [Route("ChangePassword")]
