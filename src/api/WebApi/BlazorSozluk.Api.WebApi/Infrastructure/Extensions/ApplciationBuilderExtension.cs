@@ -1,5 +1,5 @@
-﻿using BlazorSozluk.Api.WebApi.Infrastructure.Results;
-using BlazorSozluk.Common.Infrastructure.Exceptions;
+﻿using BlazorSozluk.Common.Infrastructure.Exceptions;
+using BlazorSozluk.Common.Infrastructure.Results;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
@@ -12,18 +12,22 @@ namespace BlazorSozluk.Api.WebApi.Infrastructure.Extensions
                 bool useDefaultHandlingResponse = true,
                 Func<HttpContext, Exception,Task> handleException = null)
         {
-            app.Run(context =>
+            app.UseExceptionHandler(options =>
             {
-            var exceptiponObject = context.Features.Get<IExceptionHandlerFeature>();
+                options.Run(context =>
+                       {
+                            var exceptiponObject = context.Features.Get<IExceptionHandlerFeature>();
 
-            if (!useDefaultHandlingResponse && handleException == null)
-                throw new ArgumentNullException(nameof(handleException),
-                    $"{nameof(handleException)} con not be null when {nameof(useDefaultHandlingResponse)} is false");
-            if (!useDefaultHandlingResponse && handleException != null)
-                return handleException(context, exceptiponObject.Error);
+                            if (!useDefaultHandlingResponse && handleException == null)
+                                throw new ArgumentNullException(nameof(handleException),
+                                    $"{nameof(handleException)} con not be null when {nameof(useDefaultHandlingResponse)} is false");
+                            if (!useDefaultHandlingResponse && handleException != null)
+                                return handleException(context, exceptiponObject.Error);
 
-            return DefaultHandleException(context, exceptiponObject.Error, includeExceptionsDetails);
+                            return DefaultHandleException(context, exceptiponObject.Error, includeExceptionsDetails);
+                       });
             });
+           
 
             return app;
         }

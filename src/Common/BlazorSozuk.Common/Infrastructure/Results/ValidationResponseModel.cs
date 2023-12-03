@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace BlazorSozluk.Api.WebApi.Infrastructure.Results;
+namespace BlazorSozluk.Common.Infrastructure.Results;
 
 public class ValidationResponseModel
 {
@@ -9,9 +9,9 @@ public class ValidationResponseModel
     {
         Errors = errors;
     }
-    public ValidationResponseModel(string message) : this (new List<string>() { message})
+    public ValidationResponseModel(string message) : this(new List<string>() { message })
     {
-        
+
     }
 
 
