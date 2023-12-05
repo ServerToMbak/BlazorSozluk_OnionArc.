@@ -36,7 +36,7 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
             return result.IsSuccessStatusCode;
         }
 
-        public async Task<bool> ChagngeUserPassword(string oldPassword, string newPassword)
+        public async Task<bool> ChangeUserPassword(string oldPassword, string newPassword)
         {
             var command = new ChangeUserPasswordCommand(null, oldPassword, newPassword);
             var httpResponse = await _client.PostAsJsonAsync("/api/user/ChangePassword", command);

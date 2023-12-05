@@ -15,6 +15,8 @@ public class BlazorSozlukContext : DbContext
     {    
     }
     public DbSet<User> Users { get; set; }
+
+
     public DbSet<Entry> Entries { get; set; }
 
     public DbSet<EntryVote> EntryVotes { get; set; }
