@@ -80,8 +80,9 @@ public class EntryService : IEntryService
     }
 
     public async Task<List<SearchEntryViewModel>> SearchBySubject(string searchText)
+        //https://localhost:5001/api/Entry/Search?SearchText=a
     {
-        var result = await _client.GetFromJsonAsync<List<SearchEntryViewModel>>($"/api/entry/Serch?searchText={searchText}");
+        var result = await _client.GetFromJsonAsync<List<SearchEntryViewModel>>($"/api/Entry/Search?SearchText={searchText}");
 
         return result;
     }

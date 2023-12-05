@@ -21,7 +21,7 @@
 
             </div>
 
-            <button type="button" class="btn btn-sozluk btn-success"
+            <button type="button" class="form-control btn btn-sozluk btn-success"
                     @onclick="@Search"
                     @onfocusout="@OnSearchFocusOut">
                     <i class="fa fa-search h-75"></i>
@@ -35,8 +35,7 @@
                 {
                     <li class="list-group-item">
                         <a @onclick="async()=>await GoEntry(searchItem.Id)">
-
-
+                            @searchItem.Subject
                         </a>
 
                     </li>
@@ -47,7 +46,7 @@
 
     </div>
    @*  //Todo Enable this after auth is enabled *@
-   @*  <authorizeView>
+    <AuthorizeView>
         <Authorized> 
              <div class="top-nav">
                 <input type="button" class="form-control btn-success btn-sozluk w-auto" value="Create Entry" @onclick="NavigateCreateEntryPage" />
@@ -56,13 +55,13 @@
             </div> 
          </Authorized> 
 
-        <NotAuthorized> *@
+        <NotAuthorized>
             <div class="top-nav">
-                <input type="button" class="form-control btn-success btn-sozluk w-auto" value="Login" @onclick="@NavigateLoginPage"/>
+                <input type="button" class="input-group-prepend btn-success btn-sozluk w-auto" value="Login" @onclick="@NavigateLoginPage" />
             </div>
-        @* </NotAuthorized>
+        </NotAuthorized>
 
-    </authorizeView> *@
+    </AuthorizeView>
 
 
     <div class="sub-nav">

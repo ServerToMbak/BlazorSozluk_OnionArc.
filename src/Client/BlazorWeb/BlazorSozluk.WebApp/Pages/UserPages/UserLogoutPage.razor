@@ -1,0 +1,19 @@
+﻿@page "/logout"
+
+
+@code {
+
+    [Inject]
+    IIdentityService identityService { get; set; }
+
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await identityService.LogOut();
+        navigationManager.NavigateTo("/");
+    }
+   
+
+}

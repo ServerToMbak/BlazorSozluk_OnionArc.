@@ -30,7 +30,8 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
         }
 
         var dbUser = _mapper.Map<Domain.Models.User>(request);
-
+        var encPass = PassworEncrypter.Encrpt(request.Password);
+        dbUser.Password = encPass;
         var rows = await _userRepository.AddAsync(dbUser);
 
         //Email Changed/Created

@@ -3,8 +3,10 @@ using BlazorSozluk.Common.Infrastructure.Exceptions;
 using BlazorSozluk.Common.Infrastructure.Results;
 using BlazorSozluk.Common.Models.Queries;
 using BlazorSozluk.Common.Models.RequestModels;
+using BlazorSozluk.WebApp.Infrastructure.auth;
 using BlazorSozluk.WebApp.Infrastructure.Extensions;
 using BlazorSozluk.WebApp.Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -15,11 +17,12 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
     {
         private readonly HttpClient _client;
         private readonly ISyncLocalStorageService _syncLocalStorageService;
-
-        public IdentityService(HttpClient client, ISyncLocalStorageService syncLocalStorage)
+        private readonly AuthenticationStateProvider _authenticationStateProvider;
+        public IdentityService(HttpClient client, ISyncLocalStorageService syncLocalStorage, AuthenticationStateProvider authenticationStateProvider)
         {
             _client = client;
             _syncLocalStorageService = syncLocalStorage;
+            _authenticationStateProvider = authenticationStateProvider;
         }
 
 
@@ -68,8 +71,8 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
                 _syncLocalStorageService.SetUserName(response.UserName);
 
 
-                //TODO Check after auth
-                //((authStateProvider)autStateProvider).NotifyUserLogin(response.UserName, response.Id);
+               
+                ((AuthStateProvider)_authenticationStateProvider).NotifyUserLogin(response.UserName, response.Id);
 
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", response.UserName);
 
@@ -78,14 +81,13 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
             return false;
         }
 
-        public void LogOut()
+        public async Task LogOut()
         {
             _syncLocalStorageService.RemoveItem(LocalStorageExtension.TokenName);
             _syncLocalStorageService.RemoveItem(LocalStorageExtension.UserName);
             _syncLocalStorageService.RemoveItem(LocalStorageExtension.UserId);
 
-            //TODO Check after with auth
-            //((authStateProvider)authStateProvider).NotifyUserLogout();
+            ((AuthStateProvider)_authenticationStateProvider).NotifyUserLogout();
 
             _client.DefaultRequestHeaders.Authorization = null;
 

@@ -7,6 +7,6 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services.Interfaces
         bool IsLoggedIn { get; }
 
         Task<bool> Login(LoginUserCommand command);
-        void LogOut();
+        Task LogOut();
     }
 }
