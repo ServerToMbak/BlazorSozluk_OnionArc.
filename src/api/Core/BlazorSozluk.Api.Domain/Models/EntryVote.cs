@@ -1,4 +1,4 @@
-﻿using BlazorSozluk.Common.ViewModels;
+﻿using BlazorSozluk.Common.Models;
 
 namespace BlazorSozluk.Api.Domain.Models;
 

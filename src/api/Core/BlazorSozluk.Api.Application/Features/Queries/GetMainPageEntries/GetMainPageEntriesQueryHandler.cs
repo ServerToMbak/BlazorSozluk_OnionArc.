@@ -3,7 +3,7 @@ using BlazorSozluk.Api.Application.Interfaces.Repositories;
 using BlazorSozluk.Common.Infrastructure.Extensions;
 using BlazorSozluk.Common.Models.Page;
 using BlazorSozluk.Common.Models.Queries;
-using BlazorSozluk.Common.ViewModels;
+using BlazorSozluk.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,6 @@
 ﻿using BlazorSozluk.Api.Application.Interfaces.Repositories;
 using BlazorSozluk.Common.Models.Queries;
-using BlazorSozluk.Common.ViewModels;
+using BlazorSozluk.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +20,7 @@ public class GetEntryDetailQueryHandler : IRequestHandler<GetEntryDetailQuery, G
         query = query.Include(i => i.CreatedBy)
                      .Include(i => i.EntryFavorites)
                      .Include(i => i.EntryVotes)
-                     .Where(i => i.CreatedById == request.UserId);
+                     .Where(i => i.Id == request.EntryId);
 
         var list = query.Select(i => new GetEntryDetailViewModel()
         {

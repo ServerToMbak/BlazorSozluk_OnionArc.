@@ -1,4 +1,4 @@
-﻿using BlazorSozluk.Common.ViewModels;
+﻿using BlazorSozluk.Common.Models;
 using MediatR;
 
 namespace BlazorSozluk.Api.Application.Features.Commands.Entry.DeleteVote;

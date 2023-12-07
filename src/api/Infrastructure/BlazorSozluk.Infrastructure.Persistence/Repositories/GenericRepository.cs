@@ -132,6 +132,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
             this.entity.Attach(entity);
         }
         this.entity.Remove(entity);
+
         return _context.SaveChangesAsync();
     }
 
@@ -193,9 +194,14 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return query;
     }
 
-    public virtual Task<List<TEntity>> GetAll(bool noTracking = true)
+    public virtual async Task<List<TEntity>> GetAll(bool noTracking = true)
     {
-        throw new NotImplementedException();
+        IQueryable<TEntity> query = entity;
+
+        if (noTracking)
+            query = query.AsNoTracking();
+
+        return await query.ToListAsync();
     }
 
     public virtual async Task<TEntity> GetByIdAsync(Guid id, bool noTracking = true, params Expression<Func<TEntity, object>>[] includes)

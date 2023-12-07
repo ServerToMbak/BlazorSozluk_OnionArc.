@@ -3,8 +3,8 @@
     public interface IFavService
     {
         Task CreatedEntryComemntFav(Guid entryCommentId);
-        Task CreatedEntryFav(Guid entryId);
+        Task CreatedEntryFav(Guid? entryId);
         Task DeleteEntryCommentFav(Guid entryCommentId);
-        Task DeleteEntryFav(Guid entryCommentId);
+        Task DeleteEntryFav(Guid? entryCommentId);
     }
 }

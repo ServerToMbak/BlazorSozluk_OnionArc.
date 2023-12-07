@@ -4,6 +4,8 @@ using BlazorSozluk.Common.Models.RequestModels;
 using BlazorSozluk.WebApp.Infrastructure.Services.Interfaces;
 using System.Collections.Generic;
 using System.Net.Http.Json;
+using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
 
 namespace BlazorSozluk.WebApp.Infrastructure.Services;
 
@@ -17,7 +19,7 @@ public class EntryService : IEntryService
     }
     public async Task<Guid> CreateEntry(CreateEntryCommand command)
     {
-        var result =await _client.PostAsJsonAsync("/api/entry/CreteEntry", command);
+        var result =await _client.PostAsJsonAsync("/api/entry/CreateEntry", command);
 
         if(!result.IsSuccessStatusCode)
             return Guid.Empty;
@@ -32,7 +34,7 @@ public class EntryService : IEntryService
 
     public async Task<Guid> CreateEntryComment(CreateEntryCommentCommand command)
     {
-        var res = await _client.PostAsJsonAsync("/api/entry/CreteEntryComment", command);
+        var res = await _client.PostAsJsonAsync("/api/entry/CreateEntryComment", command);
 
         if (!res.IsSuccessStatusCode)
             return Guid.Empty;
@@ -53,14 +55,14 @@ public class EntryService : IEntryService
 
     public async Task<PagedViewModel<GetEntryCommentsViewModel>> GetEntryComments(Guid entryId, int page, int pageSize)
     {
-        var result = await _client.GetFromJsonAsync<PagedViewModel<GetEntryCommentsViewModel>>($"/api/entry/comments/{entryId}?page&pageSize={pageSize}");
+        var result = await _client.GetFromJsonAsync<PagedViewModel<GetEntryCommentsViewModel>>($"/api/entry/comments/{entryId}?page={page}&pageSize={pageSize}");
 
         return result;
     }
 
     public async Task<GetEntryDetailViewModel> GetEntryDetail(Guid entryId)
-    { 
-        var result = await _client.GetFromJsonAsync<GetEntryDetailViewModel>($"/api/entry/{entryId}");
+    {
+        var result = await _client.GetFromJsonAsync<GetEntryDetailViewModel>($"/api/entry/id?id={entryId}");
 
         return result;
     }

@@ -1,6 +1,4 @@
-﻿using BlazorSozluk.Common.ViewModels;
-
-namespace BlazorSozluk.Common.Models.Queries;
+﻿namespace BlazorSozluk.Common.Models.Queries;
 
 public class BaseFooterRateViewModel
 {

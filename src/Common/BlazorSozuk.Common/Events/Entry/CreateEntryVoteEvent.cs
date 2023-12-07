@@ -1,4 +1,4 @@
-﻿using BlazorSozluk.Common.ViewModels;
+﻿using BlazorSozluk.Common.Models;
 
 namespace BlazorSozluk.Common.Events.Entry;
 
