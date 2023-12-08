@@ -25,5 +25,9 @@ public class MappingProfile : Profile
 
         CreateMap<Entry, GetEntriesViewModel>()
             .ForMember(x=>x.CommentCount, y => y.MapFrom(z => z.EntryComments.Count));
+
+        CreateMap<UserDetailViewModel, User>()
+            .ReverseMap();
+
     }
 }

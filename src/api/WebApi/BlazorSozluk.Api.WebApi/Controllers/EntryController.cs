@@ -47,7 +47,7 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
         [HttpGet]
         [Route("userEntries")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> GetUserEntries(string userName,Guid userId, int page, int pageSize)
         {
             if (UserId == Guid.Empty && string.IsNullOrEmpty(userName))
@@ -62,8 +62,7 @@ namespace BlazorSozluk.Api.WebApi.Controllers
         [Route("MainPageEntries")]
         public async Task<IActionResult> GetMainPageEntries(int page, int pageSize)
         {
-
-            var result = await _mediator.Send(new GetMainPageEntriesQuery(UserId,page,pageSize));
+            var result = await _mediator.Send(new GetMainPageEntriesQuery(UserId, page,pageSize));
 
             return Ok(result);
         }

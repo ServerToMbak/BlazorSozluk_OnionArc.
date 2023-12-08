@@ -32,6 +32,8 @@
     {
         command.EntryId = EntryId;
 
-        await OnClicked.InvokeAsync();
+        await OnClicked.InvokeAsync(command);
+
+        command = new CreateEntryCommentCommand();
     }
 }

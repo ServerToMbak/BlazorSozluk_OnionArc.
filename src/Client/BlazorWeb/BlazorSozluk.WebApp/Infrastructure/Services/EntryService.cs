@@ -76,13 +76,12 @@ public class EntryService : IEntryService
 
     public async Task<PagedViewModel<GetEntryDetailViewModel>> GetProfilPageEntries(int page, int pageSize, string userName = null)
     {
-        var result = await _client.GetFromJsonAsync<PagedViewModel<GetEntryDetailViewModel>>($"/api/entry/UserEntries?userName={userName}&page={page}&pageSize&{pageSize}");
+        var result = await _client.GetFromJsonAsync<PagedViewModel<GetEntryDetailViewModel>>($"/api/entry/UserEntries?userName={userName}&page={page}&pageSize={pageSize}");
         
         return result;
     }
 
     public async Task<List<SearchEntryViewModel>> SearchBySubject(string searchText)
-        //https://localhost:5001/api/Entry/Search?SearchText=a
     {
         var result = await _client.GetFromJsonAsync<List<SearchEntryViewModel>>($"/api/Entry/Search?SearchText={searchText}");
 

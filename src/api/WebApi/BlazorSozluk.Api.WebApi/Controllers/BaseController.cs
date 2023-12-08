@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BlazorSozluk.Api.WebApi.Controllers
 {
@@ -6,6 +7,17 @@ namespace BlazorSozluk.Api.WebApi.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        public Guid? UserId => Guid.NewGuid(); // new(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        public Guid? UserId
+        {
+            get
+            {
+                var userIdString = HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (Guid.TryParse(userIdString, out var userId))
+                {
+                    return userId;
+                }
+                return null;
+            }
+        }
     }
 }

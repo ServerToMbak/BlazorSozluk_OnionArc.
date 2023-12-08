@@ -1,0 +1,205 @@
+﻿
+
+
+@if(userDetail is not null)
+{
+    <h1 class="text-white"> @userDetail.UserName </h1>
+}
+
+@if (isMyProfile)
+{
+    <br />
+    <input type="button" class="form-control btn-success btn-sozluk" value="Change Details" 
+                    @onclick="(() => showForm= !showForm)" />
+
+}
+@if(showForm)
+{
+    <br />
+    <br />
+
+    <EditForm Model="@userDetail" OnValidSubmit="@OnSaveClicked">
+
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div input-group-prepend>
+                        <div class="input-group-text"> User Name </div>
+                    </div>
+                    <InputText @bind-Value="@userDetail.UserName" class="form-control" placeHolder="Nick"></InputText>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div input-group-prepend>
+                        <div class="input-group-text"> First Name </div>
+                    </div>
+                    <InputText @bind-Value="@userDetail.FirstName" class="form-control" placeHolder="First Name"></InputText>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div input-group-prepend>
+                        <div class="input-group-text"> Last Name </div>
+                    </div>
+                    <InputText @bind-Value="@userDetail.LastName" class="form-control" placeHolder="Last Name"></InputText>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div input-group-prepend>
+                        <div class="input-group-text"> Email Address </div>
+                    </div>
+                    <InputText @bind-Value="@userDetail.EmailAddress" class="form-control" placeHolder="Email Address"></InputText>
+                </div>
+            </div>
+
+        </div>
+
+        <br />
+        <button type="submit" class="form-control btn-success w-auto">Save</button>
+        <br />
+        <br />
+
+        <input type="button" class="form-control btn-dark  bg-gradient" value="Change Password"
+               @onclick="() => showChangePassowrdSection =! showChangePassowrdSection" />
+
+        @if (showChangePassowrdSection)
+        {
+            @if(changePasswordErrorText != string.Empty )
+            {
+                <span class="text-danger"> @changePasswordErrorText </span>
+            }
+
+            <div class="form-row">
+                <div class="col-auto">
+                    <InputText @bind-Value="@oldPassword"  class="form-control" placeHolder="Old Password"/>
+                    <InputText @bind-Value="@newPassword" class="form-control" placeHolder="new Password" />
+
+                    <br />
+
+                    <input type="button" class="form-control btn-success btn-sozluk" value="save" @onclick="ChangePassoword"/>
+                </div>
+
+
+            </div>
+                <br />
+        }
+
+
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public Guid UserId { get; set; }
+
+    [Parameter]
+    public string UserName { get; set; }
+    [Inject]
+    ILocalStorageService LocalStorageService { get; set; }
+
+    [Inject]
+    AuthenticationStateProvider authenticationStateProvider { get; set; }
+
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+
+    [Inject]
+    IUserService userService { get; set; }
+
+    private UserDetailViewModel userDetail = new();
+    private bool showForm;
+    private bool isMyProfile;
+    private string emailBeforeChange;
+
+    private bool showChangePassowrdSection;
+    private string oldPassword;
+    private string newPassword;
+    private string changePasswordErrorText;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        if(!string.IsNullOrEmpty(UserName))
+        {
+            userDetail = await userService.GetUserDetail(UserName);
+        }else
+        {
+            if (UserId == Guid.Empty && string.IsNullOrEmpty(UserName))
+            {
+                UserId = await authenticationStateProvider.GetUserId();
+            }
+
+            userDetail = await userService.GetUserDetail(UserName);
+        }
+
+
+        emailBeforeChange = userDetail.EmailAddress;
+
+
+        var myUserName = await LocalStorageService.GetUserName();
+        var myUserId = await LocalStorageService.GetUserId();
+
+
+        isMyProfile = userDetail.Id == myUserId || myUserName == userDetail.UserName; 
+
+
+
+
+    }
+
+
+    public async Task OnSaveClicked()
+    {
+
+        var success = await userService.UpdateUser(userDetail);
+
+        if(emailBeforeChange != userDetail.EmailAddress)
+        {
+            navigationManager.NavigateTo("/logout");
+        }
+
+        if(success)
+        {
+            showForm = false;
+        }
+
+    }
+
+    public async Task ChangePassoword()
+    {
+        if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrEmpty(newPassword))
+        {
+            changePasswordErrorText = "Fill both old and new password fields";
+            return;
+        }
+
+        try
+        {
+            var success = await userService.ChangeUserPassword(oldPassword, newPassword);
+
+            if(success)
+            {
+                showChangePassowrdSection = false;
+            }
+        }
+        catch(Exception ex)
+        {
+            changePasswordErrorText = ex.Message;
+        }
+    }
+
+}

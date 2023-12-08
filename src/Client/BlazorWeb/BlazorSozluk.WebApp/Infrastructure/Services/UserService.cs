@@ -25,7 +25,7 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
 
         public async Task<UserDetailViewModel> GetUserDetail(string userName)
         {
-            var userDetail = await _client.GetFromJsonAsync<UserDetailViewModel>($"/api/username/{userName}");
+            var userDetail = await _client.GetFromJsonAsync<UserDetailViewModel>($"/api/User/username/{userName}");
             return userDetail;
         }
 
