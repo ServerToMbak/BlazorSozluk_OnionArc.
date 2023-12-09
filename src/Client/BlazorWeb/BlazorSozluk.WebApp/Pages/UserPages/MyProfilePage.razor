@@ -3,7 +3,7 @@
 @page "/me"
 
 
-<UserProfileDetailComponent  UserName="@UserName" UserId="@UserId"/>
+<UserProfileDetailComponent  userName="@UserName" UserId="@UserId"/>
 
 <br />
 
@@ -23,6 +23,9 @@
     [Inject]
     IEntryService entryService { get; set; }
 
+    [Inject]
+    ILocalStorageService localStorageService { get; set; }
+
     PagedViewModel<GetEntryDetailViewModel> entries;
 
     [Parameter]
@@ -40,6 +43,16 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        entries = await entryService.GetProfilPageEntries(CurrentPage, 20, UserName);
+        if(UserName == null)
+        {
+            var name =await localStorageService.GetUserName();
+            entries = await entryService.GetProfilPageEntries(CurrentPage, 20, name);
+            return;
+        }
+        else
+        {
+            entries = await entryService.GetProfilPageEntries(CurrentPage, 20, UserName);
+        }
+
     }
 }

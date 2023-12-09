@@ -106,7 +106,7 @@
     public Guid UserId { get; set; }
 
     [Parameter]
-    public string UserName { get; set; }
+    public string userName { get; set; }
     [Inject]
     ILocalStorageService LocalStorageService { get; set; }
 
@@ -133,17 +133,17 @@
     protected override async Task OnInitializedAsync()
     {
 
-        if(!string.IsNullOrEmpty(UserName))
+        if(!string.IsNullOrEmpty(userName))
         {
-            userDetail = await userService.GetUserDetail(UserName);
+            userDetail = await userService.GetUserDetail(userName);
         }else
         {
-            if (UserId == Guid.Empty && string.IsNullOrEmpty(UserName))
+            if (UserId == Guid.Empty && string.IsNullOrEmpty(userName))
             {
                 UserId = await authenticationStateProvider.GetUserId();
             }
 
-            userDetail = await userService.GetUserDetail(UserName);
+            userDetail = await userService.GetUserDetail(UserId);
         }
 
 

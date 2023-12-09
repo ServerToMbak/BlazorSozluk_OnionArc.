@@ -47,7 +47,7 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
         [HttpGet]
         [Route("userEntries")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> GetUserEntries(string userName,Guid userId, int page, int pageSize)
         {
             if (UserId == Guid.Empty && string.IsNullOrEmpty(userName))

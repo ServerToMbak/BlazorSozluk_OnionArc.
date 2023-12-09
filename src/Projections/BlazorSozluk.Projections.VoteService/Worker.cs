@@ -1,24 +1,36 @@
-namespace BlazorSozluk.Projections.VoteService
+using BlazorSozluk.Common.Events.Entry;
+using BlazorSozluk.Common.Infrastructure;
+using BlazorSozluk.Common;
+
+namespace BlazorSozluk.Projections.VoteService;
+
+public class Worker : BackgroundService
 {
-    public class Worker : BackgroundService
+    private readonly ILogger<Worker> _logger;
+    private readonly IConfiguration _configuration;
+
+    public Worker(ILogger<Worker> logger , IConfiguration configuration)
     {
-        private readonly ILogger<Worker> _logger;
+        _logger = logger;
+        _configuration = configuration;
+    }
 
-        public Worker(ILogger<Worker> logger)
-        {
-            _logger = logger;
-        }
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
+        var connStr = _configuration.GetConnectionString("SqlServer");
+
+        var voteService = new Services.VoteService(connStr);
+
+        QueueFactory.CreateBasiConsumer()
+            .EnsurExchange(SozlukConstants.FavExchangeName)
+            .EnsurQueue(SozlukConstants.CreateEntryCommentFavQueueName, SozlukConstants.FavExchangeName)
+            .Receive<CreateEntryVoteEvent>(vote =>
             {
-                if (_logger.IsEnabled(LogLevel.Information))
-                {
-                    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                }
-                await Task.Delay(1000, stoppingToken);
-            }
-        }
+                // db insert
+                voteService.CreateEntryVote(vote).GetAwaiter().GetResult();
+                _logger.LogInformation($"Received Entry Received EntryId {0}, VoteType: {1}", vote.EntryId, vote.VoteType);
+            })
+            .StartConsuming(SozlukConstants.CreateEntryVoteQueueName);
     }
 }
