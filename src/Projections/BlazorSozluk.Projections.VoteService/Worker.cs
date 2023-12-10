@@ -33,7 +33,7 @@ public class Worker : BackgroundService
             {
                 // db insert
                 voteService.CreateEntryCommentVote(vote).GetAwaiter().GetResult();
-                _logger.LogInformation($"CreateEntryCommentVote Received EntryId {0}, VoteType: {1}", vote.EntryCommentId, vote.VoteType);
+                _logger.LogInformation($"CreateEntryCommentVote Received EntryId {vote.EntryCommentId}, VoteType: {vote.VoteType}");
             })
             .StartConsuming(SozlukConstants.CreateEntryComemntVoteQueueName);
 
@@ -46,7 +46,7 @@ public class Worker : BackgroundService
           {
               // db insert
               voteService.DeleteEntryCommentVote(vote.EntryCommentId,vote.CreatedBy).GetAwaiter().GetResult();
-              _logger.LogInformation($"DeleteEntryCommentVote Received EntryId {0}, VoteType: {1}", vote.EntryCommentId);
+              _logger.LogInformation($"DeleteEntryCommentVote Received EntryId {vote.EntryCommentId}");
           })
           .StartConsuming(SozlukConstants.DeleteEntryCommentVoteQueueName);
         #endregion
@@ -60,7 +60,7 @@ public class Worker : BackgroundService
             {
                
                 voteService.CreateEntryVote(vote).GetAwaiter().GetResult();
-                _logger.LogInformation($"CreateEntryVote Received EntryId {0}, VoteType: {1}", vote.entryId, vote.VoteType);
+                _logger.LogInformation($"CreateEntryVote Received  {vote.entryId}, VoteType: {vote.VoteType}");
             })
             .StartConsuming(SozlukConstants.CreateEntryVoteQueueName);
 
@@ -73,7 +73,7 @@ public class Worker : BackgroundService
           {
               
               voteService.DeleteEntryVote(vote.EntryId, vote.CreatedBy).GetAwaiter().GetResult();
-              _logger.LogInformation($"DeleteEntryVote Received EntryId {0}, VoteType: {1}", vote.EntryId);
+              _logger.LogInformation($"DeleteEntryVote Received EntryId {vote.EntryId}");
           })
           .StartConsuming(SozlukConstants.DeleteEntryVoteQueueName);
 
