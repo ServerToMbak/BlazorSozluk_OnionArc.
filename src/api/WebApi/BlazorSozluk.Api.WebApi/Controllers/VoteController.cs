@@ -4,12 +4,13 @@ using BlazorSozluk.Common.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BlazorSozluk.Api.Application.Features.Commands.Entry.DeleteVote;
 
 namespace BlazorSozluk.Api.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class VoteController : BaseController
     {
         private readonly IMediator _mediator;
@@ -27,6 +28,15 @@ namespace BlazorSozluk.Api.WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        [Route("DeleteEntryVote/{entryId}")]
+        public async Task<IActionResult> DeleteEntryVote(Guid entryId, VoteType voteType = VoteType.UpVote)
+        {
+            var result = await _mediator.Send(new DeleteEntryVoteCommand(entryId, UserId.Value));
+
+            return Ok(result);
+        }
+
 
         [HttpPost]
         [Route("EntryComment/{entryCommentId}")]
@@ -39,7 +49,7 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
         [HttpPost]
         [Route("DeleteEntryCommentVote/{entryCommentId}")]
-        public async Task<IActionResult> DeleteEntryVote(Guid entryCommentId, VoteType voteType = VoteType.UpVote)
+        public async Task<IActionResult> DeleteEntryCommentVote(Guid entryCommentId, VoteType voteType = VoteType.UpVote)
         {
             var result = await _mediator.Send(new DeleteEntryCommentVoteCommand(entryCommentId, UserId.Value));
 

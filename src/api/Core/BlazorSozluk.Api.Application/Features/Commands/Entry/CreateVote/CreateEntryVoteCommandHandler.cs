@@ -18,7 +18,7 @@ public class CreateEntryVoteCommandHandler : IRequestHandler<CreateEntryVoteComm
                                           obj: new CreateEntryVoteEvent() 
                                           {
                                             CreatedBy = request.CreatedBy,
-                                            EntryId = request.EntryId,
+                                            entryId = request.EntryId,
                                             VoteType = request.VoteType,
                                           });
 

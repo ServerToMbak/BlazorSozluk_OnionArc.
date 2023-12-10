@@ -14,19 +14,19 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
             await _client.PostAsync($"/api/favorite/Entry/{entryId}", null);
         }
 
-        public async Task CreatedEntryComemntFav(Guid entryCommentId)
+        public async Task CreatedEntryComemntFav(Guid? entryCommentId)
         {
             await _client.PostAsync($"/api/favorite/EntryComment/{entryCommentId}", null);
         }
 
-        public async Task DeleteEntryFav(Guid? entryCommentId)
+        public async Task DeleteEntryFav(Guid? entryId)
         {
-            await _client.PostAsync($"/api/favorite/DeleteEntryfav/{entryCommentId}", null);
+            await _client.PostAsync($"/api/favorite/DeleteEntryfav/{entryId}", null);
         }
 
-        public async Task DeleteEntryCommentFav(Guid entryCommentId)
+        public async Task DeleteEntryCommentFav(Guid? entryCommentId)
         {
-            await _client.PostAsync($"/api/favorite/DeleteEntrCommentfav/{entryCommentId}", null);
+            await _client.PostAsync($"/api/favorite/DeleteEntryCommentfav/{entryCommentId}", null);
         }
 
     }

@@ -14,7 +14,7 @@ public static class QueueFactory
     {
         var channel = CreateBasiConsumer()
             .EnsurExchange(exchangeName,exchangeType)
-            .EnsurQueue(queueName,exchangeName)
+            .EnsureQueue(queueName,exchangeName)
             .Model;
 
         var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(obj));
@@ -45,7 +45,7 @@ public static class QueueFactory
         return consumer;
     }
 
-    public static EventingBasicConsumer EnsurQueue(this EventingBasicConsumer consumer,
+    public static EventingBasicConsumer EnsureQueue(this EventingBasicConsumer consumer,
                                                    string queueName,
                                                    string exchangeName)
     {

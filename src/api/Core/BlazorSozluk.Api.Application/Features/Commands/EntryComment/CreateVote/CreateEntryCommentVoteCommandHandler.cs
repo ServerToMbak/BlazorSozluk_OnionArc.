@@ -15,7 +15,7 @@ public class CreateEntryCommentVoteCommandHandler : IRequestHandler<CreateEntryC
                                            queueName: SozlukConstants.CreateEntryComemntVoteQueueName,
                                            obj: new CreateEntryCommentVoteEvent() 
                                            {
-                                                CreatedBy = request.CreatedBy,  
+                                                CreatedById = request.CreatedBy,  
                                                 EntryCommentId = request.EntryCommentId,
                                                 VoteType = request.VoteType,
                                            });

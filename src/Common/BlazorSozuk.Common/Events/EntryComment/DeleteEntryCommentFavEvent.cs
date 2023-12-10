@@ -6,6 +6,6 @@ namespace BlazorSozluk.Common.Events.EntryComment
     {
         public Guid EntryCommentId { get; set; }
 
-        public Guid CreatedBy { get; set; }
+        public Guid CreatedById { get; set; }
     }
 }

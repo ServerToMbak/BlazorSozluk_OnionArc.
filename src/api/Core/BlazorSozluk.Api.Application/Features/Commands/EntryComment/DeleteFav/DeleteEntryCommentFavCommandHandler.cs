@@ -14,7 +14,7 @@ public class DeleteEntryCommentFavCommandHandler : IRequestHandler<DeleteEntryCo
                                             queueName: SozlukConstants.DeleteEntryCommentFavQueueName,
                                             obj: new DeleteEntryCommentFavEvent() 
                                             {
-                                                CreatedBy = request.UserId,
+                                                CreatedById = request.UserId,
                                                 EntryCommentId = request.EntryCommentId
                                             });
 
