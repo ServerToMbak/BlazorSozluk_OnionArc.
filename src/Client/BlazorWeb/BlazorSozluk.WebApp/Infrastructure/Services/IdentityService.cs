@@ -74,7 +74,7 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
                
                 ((AuthStateProvider)_authenticationStateProvider).NotifyUserLogin(response.UserName, response.Id);
 
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", response.UserName);
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", response.Token);
 
                 return true;
             }

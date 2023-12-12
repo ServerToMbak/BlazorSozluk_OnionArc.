@@ -1,0 +1,67 @@
+version: '3.4'
+
+services:
+  blazorsozluk.api.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080  
+    ports:
+      - 8080:8080
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+    - blazor_backend
+    - blazor_frontend
+    
+
+
+  blazorsozluk.webapp:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=80
+    ports:
+      - "80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+    - blazor_frontend
+
+
+
+
+  blazorsozluk.projections.favoriteservice:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+    networks:
+        - blazor_backend
+
+  blazorsozluk.projections.userservice:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+    networks:
+        - blazor_backend
+
+  blazorsozluk.projections.voteservice:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro 
+    networks:
+        - blazor_backend
+
+
+networks:
+  blazor_backend:
+    driver: bridge
+    external: true
+
+  blazor_frontend:
+    driver: bridge
+    external: true
+  

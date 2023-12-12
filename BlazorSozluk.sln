@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D906CA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projections", "Projections", "{2E33CD63-CF84-4198-A2AA-8E4295C40401}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{404E1E57-B5FB-4A94-8B26-2C8E9110218D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{404E1E57-B5FB-4A94-8B26-2C8E9110218D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AD1E3D27-A582-4CA7-86A5-95F45C24646F}"
 EndProject
@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{941CEFB9-E4EA-4DCE-BD57-E552406289D0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BazorWeb", "BazorWeb", "{7AA9085C-91B0-4B72-BF13-902C68312D57}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorWeb", "BlazorWeb", "{7AA9085C-91B0-4B72-BF13-902C68312D57}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSozluk.Common", "src\Common\BlazorSozuk.Common\BlazorSozluk.Common.csproj", "{E251C680-A7E7-4E76-ADEC-AA050DB564FD}"
 EndProject
@@ -38,6 +38,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSozluk.WebApp", "src\Client\BlazorWeb\BlazorSozluk.WebApp\BlazorSozluk.WebApp.csproj", "{568C4E68-1B11-40DC-B669-E45634593205}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSozluk.Projections.UserService", "src\Projections\BlazorSozluk.Projections.UserService\BlazorSozluk.Projections.UserService.csproj", "{1D2EFF26-D1A1-4761-8E82-E6753F90FB2F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B2A16C63-A737-4D53-A698-5893153C0E12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{463DD864-AB24-404C-AFBB-F6535F454816}"
+	ProjectSection(SolutionItems) = preProject
+		DockerCompoSteps_External.txt = DockerCompoSteps_External.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +88,10 @@ Global
 		{1D2EFF26-D1A1-4761-8E82-E6753F90FB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D2EFF26-D1A1-4761-8E82-E6753F90FB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D2EFF26-D1A1-4761-8E82-E6753F90FB2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A16C63-A737-4D53-A698-5893153C0E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A16C63-A737-4D53-A698-5893153C0E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A16C63-A737-4D53-A698-5893153C0E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A16C63-A737-4D53-A698-5893153C0E12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
