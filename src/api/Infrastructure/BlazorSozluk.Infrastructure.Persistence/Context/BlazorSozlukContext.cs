@@ -1,5 +1,6 @@
 ﻿using BlazorSozluk.Api.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Reflection;
 
 namespace BlazorSozluk.Api.Infrastructure.Persistence.Context;
@@ -33,7 +34,8 @@ public class BlazorSozlukContext : DbContext
     {
         if(!optionsBuilder.IsConfigured)
         {
-            var connStr = "server=(localdb)\\MSSQLLocalDB; database=BlazorSozluk ;trusted_connection=true";
+           
+            var connStr = "Data Source=localhost;Initial Catalog=SozlukApp;User ID=sa;Password=Passw0rd; Persist Security Info=true; TrustServerCertificate=True";
             optionsBuilder.UseSqlServer(connStr,opt=>
             {
                 opt.EnableRetryOnFailure();

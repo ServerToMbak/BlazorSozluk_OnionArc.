@@ -8,6 +8,7 @@ docker network create blazor_frontentd --attachable
 2)Add external container into the newly created networks
 
 docker network connect blazor_backend rabbit-server 
+docker network connect blazor_backend sql1
 // to  be sure this operation(connect) worked or not write that code to cmd and check networks colomn code :
 --> docker container inspect rabbit-server
 
@@ -15,3 +16,8 @@ docker network connect blazor_backend rabbit-server
 3) Replace RabbitMQ hsot name constants with container name(rabbit-server)
 
 4) Replace	DB Host name with container name(I didnt create docker db yet! so will pass this operation for now)
+
+
+docker-compose build -- solution dosya konumuna git cmd'de bunu yapýþtur ve çalýþtýr docker'ý copmpose edip kurucak bizim için
+
+docker-compose up -d -- sonra bunu yaz, docker ayaðý kalkacak.
